@@ -1,0 +1,12 @@
+---
+
+# playbook to update the users on all boxes by environment
+
+# if running locally, use something like:
+# ansible-playbook -i inventory -e "env=dev" -u ec2-user --private-key $AWS_DEVOPS_KEY
+
+- name: update users for environment
+  gather_facts: true
+  become: true
+  roles:
+    - aaptivusers

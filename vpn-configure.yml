@@ -1,0 +1,10 @@
+# Configures an AWS instance on Amazon Linux with OpenVPN:
+# ansible-playbook vpn-configure.yml -i inventory --extra-vars "env=prod" --private-key /Path/to/AWS/ssh/key --user ec2-user  --diff
+---
+  - name: Configure vpn instance
+    hosts: "tag_Name_{{ env }}_vpn"
+    become: True
+    gather_facts: True
+    roles:
+      - aws_users
+      - vpn

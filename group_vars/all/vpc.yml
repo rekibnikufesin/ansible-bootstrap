@@ -1,0 +1,6 @@
+---
+vpc_region: us-east-1 # TODO: replace if using different region
+vpc_id: vpc-00000 # TODO: replace with your VPC ID
+vpc_address_block:
+  cidr_format: 10.0.0.0/16 # TODO: replace with your CIDR
+  netmask_format: 10.0.0.0 255.255.0.0 # TODO: replace with netmask

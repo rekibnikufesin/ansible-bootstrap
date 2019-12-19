@@ -1,0 +1,15 @@
+[localhost]
+localhost ansible_python_interpreter=../.env/bin/python
+
+[tag_Env_dev]
+[tag_Env_staging]
+[tag_Env_prod]
+
+[dev:children]
+tag_Env_dev
+
+[staging:children]
+tag_Env_staging
+
+[prod:children]
+tag_Env_prod

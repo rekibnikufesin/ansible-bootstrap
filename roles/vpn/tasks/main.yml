@@ -1,0 +1,70 @@
+---
+
+- name: install the openvpn and easy-rsa packages
+  yum:
+    name: ['openvpn', 'easy-rsa']
+    enablerepo: epel
+
+- name: install pexpect pip package to faciliate automated vpn config creation
+  pip:
+    name: pexpect
+
+- name: server config file
+  template:
+    src: server.conf.j2
+    dest: /etc/openvpn/server.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart openvpn
+
+- name: iptables config
+  template:
+    src: iptables.j2
+    dest: /etc/sysconfig/iptables
+    owner: root
+    group: root
+    mode: 0400
+  notify:
+    - restart iptables
+
+- name: set ip_forward in sysctl
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: enable openvpn service
+  service:
+    name: openvpn
+    enabled: yes
+
+- name: create client-config dir
+  file: path=/etc/openvpn/client-config state=directory
+
+- name: client config file
+  template:
+    src: client.conf.j2
+    dest: /etc/openvpn/client-config/client.conf
+    owner: root
+    group: root
+    mode: 0666
+
+- name: install build-client script
+  copy:
+    src: files/build-client.sh
+    dest: /etc/openvpn/build-client.sh
+    owner: root
+    group: root
+    mode: 0777
+ 
+- name: install revoke-user script
+  copy:
+    src: files/revoke-client.sh
+    dest: /etc/openvpn/revoke-client.sh
+    owner: root
+    group: root
+    mode: 0777

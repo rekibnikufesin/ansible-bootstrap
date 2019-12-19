@@ -1,0 +1,15 @@
+---
+vpn_key_name: aws_key # TODO: replace with key name used by AWS
+vpn_instance_type: t2.small
+
+vpn_base_image: ami-55ef662f
+vpn_instance_profile_name: ec2-instance-profile # TODO: replace with EC2 instance profile name
+vpn_vpc_subnet_id: subnet-12345678 # TODO: replace with subnet id vpc instance shoud be in
+
+vpn_sg_name: VPN # TODO: replace with Security Group name for VPN
+
+vpn_address_block: # TODO: replace if this cidr range conflicts with your network
+  netmask_format: 10.5.0.0 255.255.255.0
+  cidr_format: 10.5.0.0/24
+
+vpn_elastic_ip: 1.2.3.4 # TODO: replace with Elastic IP used by your VPN instance

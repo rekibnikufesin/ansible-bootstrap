@@ -1,0 +1,8 @@
+---
+  ssh_users:
+    - username: TODO: insert_user_name
+    - uid: 5001 # a unique ID across all systems
+    - fullname: Replace With Name
+    - type: admin
+    - state: present
+    - key: users public key

@@ -1,0 +1,8 @@
+*nat
+:PREROUTING ACCEPT [21:1523]
+:INPUT ACCEPT [12:628]
+:OUTPUT ACCEPT [179:11809]
+:POSTROUTING ACCEPT [62:4785]
+-A POSTROUTING -s {{ vpn_address_block.cidr_format }} -o eth0 -j MASQUERADE
+-A POSTROUTING ! -d {{ vpc_address_block.cidr_format }} -o eth0 -j MASQUERADE
+COMMIT
